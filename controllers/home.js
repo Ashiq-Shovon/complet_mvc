@@ -1,6 +1,7 @@
 var express 	= require('express');
 var router 		= express.Router();
 var userModel   = require.main.require('./models/user-model');
+var employeeModel = require.main.require('./models/employee_model');
 
 router.get('*', function(req, res, next){
 	if(req.cookies['username'] == null){
@@ -16,6 +17,13 @@ router.get('/', function(req, res){
 			
 			if(result.type == 'admin'){
 				res.render('home/index', {user: result});
+			}
+
+			else{
+				
+					res.render('home/user_page')
+				
+				
 			}
 			
 
@@ -48,6 +56,9 @@ router.post('/edit/:id', function(req, res){
 	
 	var user = {
 		username: req.body.username,
+		company_name:req.body.company_name,
+		employer_name:req.body.employer_name,
+		contact_no:req.body.contact_no,
 		password: req.body.password,
 		type: req.body.type,
 		id: req.params.id
@@ -63,27 +74,28 @@ router.post('/edit/:id', function(req, res){
 })
 
 //insert
-router.get('/insert', function(req, res){
+router.get('/user_page', function(req, res){
 	
 	
-		res.render('home/insert');
+		res.render('home/user_page');
 	
 })
 
-router.post('/insert', function(req, res){
+router.post('/', function(req, res){
 	
 	var user = {
-		username: req.body.username,
-		password: req.body.password,
-		type: req.body.type,
-		id: req.params.id
+		company_name: req.body.company_name,
+		job_title:req.body.company_title,
+		job_location:req.body.job_location,
+		salary:req.body.salary,
+		
 	};
 
-	userModel.insert(user, function(status){
+	employeeModel.insert(user, function(status){
 		if(status){
-			res.redirect('/home/alluser');
+			res.render('/home/user_page');
 		}else{
-			res.redirect('/home/insert');
+			//res.redirect('/home');
 		}
 	});
 })
@@ -108,6 +120,37 @@ router.post('/delete/:id', function(req, res){
 		}
 	});
 	
+})
+
+
+//employee_add
+
+router.get('/add', function(req, res){
+	
+	
+	res.render('home/insert');
+
+})
+
+router.post('/insert', function(req, res){
+
+var user = {
+	username: req.body.username,
+	company_name:req.body.company_name,
+	employer_name:req.body.employer_name,
+	contact_no:req.body.contact_no,
+	password: req.body.password,
+	type: req.body.type,
+	id: req.params.id
+};
+
+userModel.insert(user, function(status){
+	if(status){
+		res.redirect('/home/alluser');
+	}else{
+		res.redirect('/home/insert');
+	}
+});
 })
 
 

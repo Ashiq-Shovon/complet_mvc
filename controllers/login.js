@@ -1,5 +1,7 @@
 var express 	= require('express');
 var router 		= express.Router();
+//const { check, validationResult } = require('express-validator');
+var bodyParser 		= require('body-parser');
 var userModel	= require.main.require('./models/user-model');
 
 router.get('/', function(req, res){
@@ -7,8 +9,13 @@ router.get('/', function(req, res){
 	res.render('login/index');
 });
 
-router.post('/', function(req, res){
-		
+router.post('/',
+/* [check('uname','username is required').exists(),
+	check('password','password must be in 5 characters').isLength({min:5})
+]  */
+function(req, res){
+		//var errors =validationResult(req);
+		//console.log(errors.mapped());
 		var user ={
 			username: req.body.uname,
 			password: req.body.password
@@ -22,7 +29,7 @@ router.post('/', function(req, res){
 				}
 			
 			else{
-				res.redirect('/login');
+				res.redirect('/login'/* { errors : errors.mapped()} */);
 			}
 		});
 });

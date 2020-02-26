@@ -43,8 +43,8 @@ module.exports ={
 		});
 	},
 	insert: function(user, callback){
-		var sql = "insert into user values(?,?,?,?)";
-		db.execute(sql, [null, user.username, user.password, user.type], function(status){
+		var sql = "insert into user values(?,?,?,?,?,?,?)";
+		db.execute(sql, [null, user.username,user.employer_name,user.company_name,user.contact_no, user.password, user.type], function(status){
 			if(status){
 				callback(true);
 			}else{
@@ -64,8 +64,8 @@ module.exports ={
 		});
 	},
 	update: function(user, callback){
-		var sql = "update user set username=?, password=?, type=? where id=?";
-		db.execute(sql, [user.username, user.password, user.type, user.id], function(status){
+		var sql = "update user set username=?,employer_name=?,company_name=?,contact_no=?, password=?, type=? where id=?";
+		db.execute(sql, [user.username,user.employer_name,user.company_name,user.contact_no, user.password, user.type, user.id], function(status){
 			if(status){
 				callback(true);
 			}else{

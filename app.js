@@ -1,6 +1,7 @@
 //declaration
 var express 		= require('express');
 var bodyParser 		= require('body-parser');
+const { check, validationResult } = require('express-validator');
 var ejs 			= require('ejs');
 var exSession 		= require('express-session');
 var cookieParser 	= require('cookie-parser');
@@ -16,7 +17,7 @@ app.set('view engine', 'ejs');
 
 //middleware
 app.use('/abc', express.static('xyz'));
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(exSession({secret: 'my top secret value', saveUninitialized: true, resave: false}));
 app.use(cookieParser());
 app.use('/login', login);

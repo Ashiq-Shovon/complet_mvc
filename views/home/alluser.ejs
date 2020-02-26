@@ -15,6 +15,9 @@
 		<tr>
 			<td>ID</td>
 			<td>Username</td>
+			<td>Employer_name</td>
+			<td>Company_name</td>
+			<td>Contact_no</td>
 			<td>Password</td>
 			<td>Type</td>
 			<td>Action</td>
@@ -23,6 +26,9 @@
 		<tr>
 			<td><%= userlist[i].id %></td>
 			<td><%= userlist[i].username %></td>
+			<td><%= userlist[i].employer_name %></td>
+			<td><%= userlist[i].company_name %></td>
+			<td><%= userlist[i].contact_no %></td>
 			<td><%= userlist[i].password %></td>
 			<td><%= userlist[i].type %></td>
 			<td>
@@ -35,7 +41,7 @@
 		<% } %>
 		<tr>
 			<td>
-				<a href="/home/insert">INSERT</a> 
+				<a href="/home/insert">Register</a> 
 			</td>
 			 
 		 
